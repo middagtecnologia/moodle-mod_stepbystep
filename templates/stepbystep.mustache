@@ -1,0 +1,54 @@
+
+<div id="content-section">
+    <div id="courselink">{{{courselink}}}</div>
+    <h1 id="title">{{title}}</h1>
+    <div id="content-items">
+        {{#data}}
+            <div class="content-item {{#active}}active{{/active}}">
+                {{{content}}}
+            </div>
+        {{/data}}
+    </div>
+    {{#nav}}
+        <div class="content-nav">
+            <a href="#title" class="prev" style="display: none;">Anterior</a>
+            <a href="#title" class="next">Próximo</a>
+        </div>
+    {{/nav}}
+</div>
+
+{{#js}}
+require(['jquery'], function($) {
+    $('.content-nav').find('a').on('click', function () {
+        var btn_prev = $('.content-nav').find('a.prev');
+        var btn_next = $('.content-nav').find('a.next');
+        var current = $('#content-items').find('.active');
+        if (current.length == 0) {
+            $('.content-item').first().addClass('active');
+        }
+        if ($(this).hasClass('prev')) {
+            var prev = $(current).prev();
+            prev.addClass('active');
+            $(current).removeClass('active');
+            if ($(prev).is(':first-child')) {
+                $(btn_prev).hide();
+                $(btn_next).show();
+            } else {
+                $(btn_prev).show();
+                $(btn_next).show();
+            }
+        } else if ($(this).hasClass('next')) {
+            var next = $(current).next();
+            next.addClass('active');
+            $(current).removeClass('active');
+            if ($(next).is(':last-child')) {
+                $(btn_prev).show();
+                $(btn_next).hide();
+            } else {
+                $(btn_prev).show();
+                $(btn_next).show();
+            }
+        }
+    });
+});
+{{/js}}
