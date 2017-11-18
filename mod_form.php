@@ -43,7 +43,7 @@ class mod_stepbystep_mod_form extends moodleform_mod {
             }
         }
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $name = "content_$key";
             $mform->addElement('editor', $name, "Step " . (++$key), null, $editoroptions);
             $mform->setType($name, PARAM_RAW);

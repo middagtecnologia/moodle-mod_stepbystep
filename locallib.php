@@ -25,7 +25,7 @@ function mod_stepbystep_content_process($contentjson)
 function mod_stepbystep_content_save($data)
 {
     $content = [];
-    for ($i = 0; $i < 100; $i++) {
+    for ($i = 0; $i < 300; $i++) {
         $name = "content_$i";
         if (property_exists($data, $name)) {
             if (empty(trim($data->$name['text']))) {
