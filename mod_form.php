@@ -33,7 +33,8 @@ class mod_stepbystep_mod_form extends moodleform_mod {
         $editoroptions = ['maxfiles' => EDITOR_UNLIMITED_FILES, 'noclean' => true];
 
         if ($stepbystep = $this->current) {
-            if ($content = json_decode($stepbystep->content)) {
+            if (isset($stepbystep->content)) {
+                $content = json_decode($stepbystep->content);
                 foreach ($content as $value) {
                     $name = "content_$key";
                     $mform->addElement('editor', $name, "Step " . (++$key), null, $editoroptions);

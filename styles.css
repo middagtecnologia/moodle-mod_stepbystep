@@ -1,44 +1,53 @@
-/* http://chir.ag/projects/name-that-color */
-html {
-  scroll-behavior: smooth; }
 
-#page-mod-stepbystep-view #content-section {
-  padding: 2rem; }
-  #page-mod-stepbystep-view #content-section h1 {
-    color: #5B5754;
-    font-size: 2.4rem;
-    font-weight: 700;
-    margin-top: 28px;
-    margin-bottom: 25px; }
-  #page-mod-stepbystep-view #content-section #courselink {
-    float: right; }
-  #page-mod-stepbystep-view #content-section #btn-back {
-    color: #5B5754;
-    display: block;
-    margin: 0 0 2rem;
-    text-align: right; }
-  #page-mod-stepbystep-view #content-section #content-items {
+#page-mod-stepbystep-view {
+    scroll-behavior: smooth;
+}
+
+#page-mod-stepbystep-view #title {
+    display: inline-block;
+}
+
+#page-mod-stepbystep-view #stepbystep-progress {
+    background: #F2F2F2;
+    text-align: center;
+    display: inline-grid;
+    float: right;
+    height: 20px;
+    width: 190px;
+}
+
+#page-mod-stepbystep-view #stepbystep-progress div {
+    background: #DDDDDD;
+    height: 20px;
+}
+
+#page-mod-stepbystep-view #stepbystep-progress span {
+    font-size: 0.9rem;
+    margin-top: -18px;
+}
+
+#page-mod-stepbystep-view #stepbystep-progress span em {
+    font-style: normal;
+}
+
+#page-mod-stepbystep-view #content-section #content-items {
     background: #F2F2F2;
     padding: 2rem;
-    min-height: 45rem; }
-    #page-mod-stepbystep-view #content-section #content-items .content-item {
-      display: none; }
-      #page-mod-stepbystep-view #content-section #content-items .content-item.active {
-        display: block; }
-  #page-mod-stepbystep-view #content-section .content-nav a {
-    background-color: #FFCD00;
-    color: #4b4b4b;
-    display: block;
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 44px;
-    text-align: center;
-    margin: 22px 9px 0 0;
-    height: 44px;
-    width: 247px; }
-    #page-mod-stepbystep-view #content-section .content-nav a.prev {
-      float: left; }
-    #page-mod-stepbystep-view #content-section .content-nav a.next {
-      float: right; }
+    min-height: 35rem;
+}
 
-/*# sourceMappingURL=styles.css.map */
+#page-mod-stepbystep-view #content-section #content-items .content-item {
+    display: none;
+}
+
+#page-mod-stepbystep-view #content-section #content-items .content-item.active {
+    display: block;
+}
+
+#page-mod-stepbystep-view #content-section .content-nav #prev {
+    float: left;
+}
+
+#page-mod-stepbystep-view #content-section .content-nav #next {
+    float: right;
+}
