@@ -1,7 +1,13 @@
 
+<div class="clearfix"></div>
 <div id="content-section">
-    <div id="courselink">{{{courselink}}}</div>
     <h1 id="title">{{title}}</h1>
+    <div id="stepbystep-progress">
+        <div style="width:1%;"></div>
+        <span><em>1</em>%</span>
+    </div>
+    <div class="clearfix"></div>
+    <div class="box mod_introbox p-y-1">{{{ intro }}}</div>
     <div id="content-items">
         {{#data}}
             <div class="content-item {{#active}}active{{/active}}">
@@ -10,45 +16,9 @@
         {{/data}}
     </div>
     {{#nav}}
-        <div class="content-nav">
-            <a href="#title" class="prev" style="display: none;">Anterior</a>
-            <a href="#title" class="next">Próximo</a>
+        <div class="content-nav m-t-3">
+            <a id="prev" href="javascript:;" class="btn btn-info hidden">{{#str}} prev {{/str}}</a>
+            <a id="next" href="javascript:;" class="btn btn-info">{{#str}} next {{/str}}</a>
         </div>
     {{/nav}}
 </div>
-
-{{#js}}
-require(['jquery'], function($) {
-    $('.content-nav').find('a').on('click', function () {
-        var btn_prev = $('.content-nav').find('a.prev');
-        var btn_next = $('.content-nav').find('a.next');
-        var current = $('#content-items').find('.active');
-        if (current.length == 0) {
-            $('.content-item').first().addClass('active');
-        }
-        if ($(this).hasClass('prev')) {
-            var prev = $(current).prev();
-            prev.addClass('active');
-            $(current).removeClass('active');
-            if ($(prev).is(':first-child')) {
-                $(btn_prev).hide();
-                $(btn_next).show();
-            } else {
-                $(btn_prev).show();
-                $(btn_next).show();
-            }
-        } else if ($(this).hasClass('next')) {
-            var next = $(current).next();
-            next.addClass('active');
-            $(current).removeClass('active');
-            if ($(next).is(':last-child')) {
-                $(btn_prev).show();
-                $(btn_next).hide();
-            } else {
-                $(btn_prev).show();
-                $(btn_next).show();
-            }
-        }
-    });
-});
-{{/js}}

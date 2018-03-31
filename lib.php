@@ -106,7 +106,6 @@ function stepbystep_get_coursemodule_info($coursemodule)
 
     $info = new cached_cm_info();
     $info->name = $stepbystep->name;
-    $info->content = mod_stepbystep_content_save($stepbystep->content);
 
     if ($coursemodule->showdescription) {
         $info->content = format_module_intro('stepbystep', $stepbystep, $coursemodule->id, false);
