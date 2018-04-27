@@ -64,17 +64,13 @@ function stepbystep_add_instance($data, $mform = null)
 
     $context = \context_module::instance($cmid);
 
-    $content = [];
-    $length = count((array)$data);
     if ($mform) {
-        for ($i = 0; $i < $length; $i++) {
-            $name = "content_$i";
-            if (property_exists($data, $name)) {
-                if (!empty(trim($data->$name['text']))) {
-                    $draftitemid = $data->$name['itemid'];
-                    if ($draftitemid) {
-                        $content[] = file_save_draft_area_files($draftitemid, $context->id, 'mod_stepbystep', 'content', 0, stepbystep_get_editor_options($context), $data->$name['text']);
-                    }
+        $contents = $data->content;
+        foreach ($contents as $key => $item) {
+            if (!empty(trim($item['text']))) {
+                $draftitemid = $item['itemid'];
+                if ($draftitemid) {
+                    $content[] = file_save_draft_area_files($draftitemid, $context->id, 'mod_stepbystep', 'content', 0, stepbystep_get_editor_options($context), $item['text']);
                 }
             }
         }
@@ -102,16 +98,12 @@ function stepbystep_update_instance($data, $mform)
 
     $context = context_module::instance($cmid);
 
-    $content = [];
-    $length = count((array)$data);
-    for ($i = 0; $i < $length; $i++) {
-        $name = "content_$i";
-        if (property_exists($data, $name)) {
-            if (!empty(trim($data->$name['text']))) {
-                $draftitemid = $data->$name['itemid'];
-                if ($draftitemid) {
-                    $content[] = file_save_draft_area_files($draftitemid, $context->id, 'mod_stepbystep', 'content', 0, stepbystep_get_editor_options($context), $data->$name['text']);
-                }
+    $contents = $data->content;
+    foreach ($contents as $key => $item) {
+        if (!empty(trim($item['text']))) {
+            $draftitemid = $item['itemid'];
+            if ($draftitemid) {
+                $content[] = file_save_draft_area_files($draftitemid, $context->id, 'mod_stepbystep', 'content', 0, stepbystep_get_editor_options($context), $item['text']);
             }
         }
     }
@@ -241,16 +233,7 @@ function stepbystep_pluginfile($course, $cm, $context, $filearea, $args, $forced
         $relativepath = implode('/', $args);
         $fullpath = "/$context->id/mod_stepbystep/$filearea/0/$relativepath";
         if (!$file = $fs->get_file_by_hash(sha1($fullpath)) or $file->is_directory()) {
-            $stepbystep = $DB->get_record('stepbystep', array('id'=>$cm->instance), 'id, legacyfiles', MUST_EXIST);
-            if ($stepbystep->legacyfiles != RESOURCELIB_LEGACYFILES_ACTIVE) {
-                return false;
-            }
-            if (!$file = resourcelib_try_file_migration('/'.$relativepath, $cm->id, $cm->course, 'mod_stepbystep', 'content', 0)) {
-                return false;
-            }
-            //file migrate - update flag
-            $stepbystep->legacyfileslast = time();
-            $DB->update_record('stepbystep', $stepbystep);
+            return false;
         }
 
         // finally send the file

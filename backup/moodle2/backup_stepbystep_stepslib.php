@@ -12,7 +12,7 @@ class backup_stepbystep_activity_structure_step extends backup_activity_structur
         $stepbystep->set_source_table('stepbystep', array('id' => backup::VAR_ACTIVITYID));
 
         $stepbystep->annotate_files('mod_stepbystep', 'intro', null);
-        $stepbystep->annotate_files('mod_page', 'content', null);
+        $stepbystep->annotate_files('mod_stepbystep', 'content', null);
 
         return $this->prepare_activity_structure($stepbystep);
     }

@@ -13,3 +13,5 @@ $string['page:addinstance'] = 'Add a new Step by Step resource';
 $string['page:view'] = 'View Step by Step content';
 $string['privacy:metadata'] = 'The mod_stepbystep plugin does not store any personal data.';
 $string['search:activity'] = 'Step by Step';
+$string['step'] = 'Step';
+$string['stepno'] = 'Step {no}';
