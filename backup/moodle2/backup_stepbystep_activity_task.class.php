@@ -34,7 +34,7 @@ class backup_stepbystep_activity_task extends backup_activity_task
 
         //Access the link supplying an instance id
         $pattern = '#(' . $base . '/view\.php\?u=)([0-9]+)#';
-        $replacement = '$@STEPBYSTEPVIEWBYU*$2@$';
+        $replacement = '$@STEPBYSTEPVIEWBYSTEP*$2@$';
         $content = preg_replace($pattern, $replacement, $content);
 
         return $content;

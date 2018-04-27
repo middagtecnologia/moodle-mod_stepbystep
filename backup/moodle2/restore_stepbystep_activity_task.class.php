@@ -32,7 +32,7 @@ class restore_stepbystep_activity_task extends restore_activity_task
 
         $rules[] = new restore_decode_rule('STEPBYSTEPINDEX', '/mod/stepbystep/index.php?id=$1', 'course');
         $rules[] = new restore_decode_rule('STEPBYSTEPVIEWBYID', '/mod/stepbystep/view.php?id=$1', 'course_module');
-        $rules[] = new restore_decode_rule('STEPBYSTEPVIEWBYU', '/mod/stepbystep/view.php?step=$1', 'stepbystep');
+        $rules[] = new restore_decode_rule('STEPBYSTEPVIEWBYSTEP', '/mod/stepbystep/view.php?step=$1', 'stepbystep');
 
         return $rules;
     }
