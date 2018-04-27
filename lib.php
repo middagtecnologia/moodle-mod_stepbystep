@@ -64,6 +64,7 @@ function stepbystep_add_instance($data, $mform = null)
 
     $context = \context_module::instance($cmid);
 
+    $content = [];
     if ($mform) {
         $contents = $data->content;
         foreach ($contents as $key => $item) {
@@ -98,6 +99,7 @@ function stepbystep_update_instance($data, $mform)
 
     $context = context_module::instance($cmid);
 
+    $content = [];
     $contents = $data->content;
     foreach ($contents as $key => $item) {
         if (!empty(trim($item['text']))) {

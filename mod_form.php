@@ -37,7 +37,7 @@ class mod_stepbystep_mod_form extends moodleform_mod {
             $repeat = count(json_decode($this->current->content));
         }
 
-        $this->repeat_elements($repeatarray, $repeat, ['type'=> PARAM_RAW], 'content_repeats', 'content_add', 1, null, true);
+        $this->repeat_elements($repeatarray, $repeat, ['type'=> PARAM_RAW], 'content_repeats', 'content_add', 2, null, true);
 
         $mform->addRule('content[0]', null, 'required', null, 'client');
 
