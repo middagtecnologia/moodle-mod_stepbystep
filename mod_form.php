@@ -29,28 +29,18 @@ class mod_stepbystep_mod_form extends moodleform_mod {
         //-------------------------------------------------------
         $mform->addElement('header', 'textcontent', get_string('content'));
 
-        $key = 0;
-        $editoroptions = ['maxfiles' => EDITOR_UNLIMITED_FILES, 'noclean' => true];
+        $repeatarray = array();
+        $repeatarray[] = $mform->createElement('editor', 'content', get_string('stepno', 'mod_stepbystep'), null, stepbystep_get_editor_options($this->context));
 
-        if ($stepbystep = $this->current) {
-            if (isset($stepbystep->content)) {
-                $content = json_decode($stepbystep->content);
-                foreach ($content as $value) {
-                    $name = "content_$key";
-                    $mform->addElement('editor', $name, "Step " . (++$key), null, $editoroptions);
-                    $mform->setType($name, PARAM_RAW);
-                    $mform->setDefault($name, ['text' => $value, 'format' => FORMAT_HTML]);
-                }
-            }
+        $repeat = 4;
+        if ($this->current->instance) {
+            $count = count(json_decode($this->current->content));
+            $repeat = $count > $repeat ? $count : $repeat;
         }
 
-        for ($i = 0; $i < 10; $i++) {
-            $name = "content_$key";
-            $mform->addElement('editor', $name, "Step " . (++$key), null, $editoroptions);
-            $mform->setType($name, PARAM_RAW);
-        }
+        $this->repeat_elements($repeatarray, $repeat, ['type'=> PARAM_RAW], 'content_repeats', 'content_add', 4, null, true);
 
-        $mform->addRule('content_0', null, 'required', null, 'client');
+        $mform->addRule('content[0]', null, 'required', null, 'client');
 
         //-------------------------------------------------------
         $this->standard_coursemodule_elements();
@@ -59,14 +49,18 @@ class mod_stepbystep_mod_form extends moodleform_mod {
         $this->add_action_buttons();
     }
 
-    function data_preprocessing(&$default_values) {
-
-    }
-
-    function validation($data, $files) {
-        $errors = parent::validation($data, $files);
-
-        return $errors;
+    function data_preprocessing(&$default_values)
+    {
+        if ($this->current->instance) {
+            $contents = json_decode($default_values['content']);
+            foreach ($contents as $key => $content) {
+                $name = "content[$key]";
+                $draftitemid = file_get_submitted_draft_itemid($name);
+                $default_values[$name]['format'] = $default_values['contentformat'];
+                $default_values[$name]['text'] = file_prepare_draft_area($draftitemid, $this->context->id, 'mod_stepbystep', 'content', 0, stepbystep_get_editor_options($this->context), $content);
+                $default_values[$name]['itemid'] = $draftitemid;
+            }
+        }
     }
 
 }

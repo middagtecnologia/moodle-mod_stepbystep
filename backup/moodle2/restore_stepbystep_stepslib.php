@@ -29,8 +29,8 @@ class restore_stepbystep_activity_structure_step extends restore_activity_struct
 
     protected function after_execute()
     {
-        // Add stepbystep related files, no need to match by itemname (just internally handled context)
         $this->add_related_files('mod_stepbystep', 'intro', null);
+        $this->add_related_files('mod_stepbystep', 'content', null);
     }
 
 }

@@ -2,10 +2,12 @@
 <div class="clearfix"></div>
 <div id="content-section">
     <h1 id="title">{{title}}</h1>
-    <div id="stepbystep-progress">
-        <div style="width:1%;"></div>
-        <span><em>1</em>%</span>
-    </div>
+    {{#nav}}
+        <div id="stepbystep-progress">
+            <div style="width:1%;"></div>
+            <span><em>1</em>%</span>
+        </div>
+    {{/nav}}
     <div class="clearfix"></div>
     <div class="box p-y-1">{{{ intro }}}</div>
     <div id="content-items">
@@ -16,7 +18,7 @@
         {{/data}}
     </div>
     {{#nav}}
-        <div class="content-nav m-t-3">
+        <div class="content-nav m-t-3 clearfix">
             <a id="prev" href="javascript:;" class="btn btn-info hidden">{{#str}} prev {{/str}}</a>
             <a id="next" href="javascript:;" class="btn btn-info">{{#str}} next {{/str}}</a>
         </div>
