@@ -40,7 +40,7 @@ $PAGE->requires->js_call_amd('mod_stepbystep/view', 'init');
 $courselink = new single_button(new moodle_url('/course/view.php', ['id' => $course->id]), get_string('returntocourse', 'lesson'), 'get');
 list($data, $nav) = stepbystep_content_process($stepbystep->content, $context);
 $intro = "";
-if (trim(strip_tags($stepbystep->intro))) {
+if (!empty(trim($stepbystep->intro))) {
     $intro = format_module_intro('stepbystep', $stepbystep, $cm->id);
 }
 
