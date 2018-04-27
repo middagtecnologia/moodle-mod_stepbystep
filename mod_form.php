@@ -32,12 +32,13 @@ class mod_stepbystep_mod_form extends moodleform_mod {
         $repeatarray = array();
         $repeatarray[] = $mform->createElement('editor', 'content', get_string('stepno', 'mod_stepbystep'), null, stepbystep_get_editor_options($this->context));
 
-        $repeat = 1;
+        $repeat = 4;
         if ($this->current->instance) {
-            $repeat = count(json_decode($this->current->content));
+            $count = count(json_decode($this->current->content));
+            $repeat = $count > $repeat ? $count : $repeat;
         }
 
-        $this->repeat_elements($repeatarray, $repeat, ['type'=> PARAM_RAW], 'content_repeats', 'content_add', 2, null, true);
+        $this->repeat_elements($repeatarray, $repeat, ['type'=> PARAM_RAW], 'content_repeats', 'content_add', 4, null, true);
 
         $mform->addRule('content[0]', null, 'required', null, 'client');
 
